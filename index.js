@@ -619,6 +619,11 @@ function issecure(req, trustProxy) {
   if (trustProxy !== true) {
     return req.secure === true
   }
+  
+  // Custom check for 'x-arr-ssl'
+  if (req.headers['x-arr-ssl']) {
+    return true;
+  }
 
   // read the proto from x-forwarded-proto header
   var header = req.headers['x-forwarded-proto'] || '';
